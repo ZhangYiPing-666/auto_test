@@ -1,0 +1,21 @@
+<COMMON_FPKJ_XMXX>
+    <FPHXZ>发票行性质</FPHXZ>
+    <SPBM>商品编码</SPBM>
+    <ZXBM>自行编码</ZXBM>
+    <YHZCBS>优惠政策标识</YHZCBS>
+    <LSLBS>零税率标识</LSLBS>
+    <ZZSTSGL>增值税特殊管理</ZZSTSGL>
+    <XMMC>项目名称</XMMC>
+    <GGXH>规格型号</GGXH>
+    <DW>单位</DW>
+    <XMSL>项目数量</XMSL>
+    <XMDJ>项目单价</XMDJ>
+    <XMJE>项目金额</XMJE>
+    <SL>税率</SL>
+    <SE>税额</SE>
+    <BY1>备用字段 1</BY1>
+    <BY2>备用字段 2</BY2>
+    <BY3>备用字段 3</BY3>
+    <BY4>备用字段 4</BY4>
+    <BY5>备用字段 5</BY5>
+</COMMON_FPKJ_XMXX>

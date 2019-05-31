@@ -60,7 +60,7 @@ def updata_dp_kj_bule(dp_kj_dict):
     KPLX = "KPLX";updata_node_value(message_template, "KPLX", KPLX)
     ZSFS = "ZSFS";updata_node_value(message_template, "ZSFS", ZSFS)
 
-    # 组装明细
+    # 根据dp_kj_dict参数组装明细
 
     JSHJ = "JSHJ"; updata_node_value(message_template, "JSHJ", JSHJ)
     HJJE = "HJJE"; updata_node_value(message_template, "HJJE", HJJE)
