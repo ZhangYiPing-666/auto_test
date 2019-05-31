@@ -1,0 +1,60 @@
+#该项目的接口用例文件
+
+#用税号查询APPID
+/fpt-sign/centerAction.do:
+  host: http://172.25.2.85:8085     #服务器地址
+  method: GET                       #请求方式
+  header: None                      #请求header
+  rely: None                        #请求依赖数据
+  data:
+     data1: [{method: bussinessAppid,xml: <ROOT><NSRSBH>500102010004011</NSRSBH></ROOT>},
+            {APPKEY: 667bf7c79996c7a507af365a8f340a6f9009c519d28a59ae3be23cc86c2e1630}] #请求data，方式、税号，方式固定
+  respon: {
+          "APPKEY": "667bf7c79996c7a507af365a8f340a6f9009c519d28a59ae3be23cc86c2e1630",
+          "SECRET_KEY": "F6AD954A498AEDBE"
+          }                         #请求result
+
+
+/fpt-dsqz/invoice:
+    host: http://172.25.2.85:8085     #服务器地址
+    method: get #请求方式
+    header: {headerfile: None,headername: None} #请求header
+   #请求依赖数据
+    data:
+        data1:
+            [
+                {
+                "interface": {
+                "globalInfo": {
+                "appId": "企业 appId",
+                "interfaceId": "接口 ID",
+                "interfaceCode": "接口编码",
+                "requestCode": "数据交换请求发出方代码",
+                "requestTime": "数据交换请求发出时间",
+                "responseCode": "数据交换请求接受方代码",
+                "dataExchangeId": "数据交换流水号"
+                 },
+                "returnStateInfo": {
+                "returnCode": "返回代码(请求不填)",
+                "returnMessage": "base64 返回描述(请求不填)"
+                 },
+                "Data": {
+                "dataDescription": {
+                "zipCode": "0"
+                 },
+                "content": [file,messagename]
+                "contentKey": "请求数据 content 节点内的内容 MD5 再 AES 加密"
+                 }
+                 }
+                },
+                {APPKEY: 667bf7c79996c7a507af365a8f340a6f9009c519d28a59ae3be23cc86c2e1630},
+                [
+                    [{apifile: ./,apiurl: /fpt-sign/centerAction.do,case: data1},{RESPONSE.CONTENT.DATA.APPKEY,RESPONSE.CONTENT.DATA.SECRET_KEY}],
+                ]
+            ] #请求data，方式、税号，方式固定
+        data2: [{method: bussinessAppid,xml: <ROOT><NSRSBH>500102010004011</NSRSBH></ROOT>},
+                {APPKEY: 667bf7c79996c7a507af365a8f340a6f9009c519d28a59ae3be23cc86c2e1630}] #请求data，方式、税号，方式固定
+
+
+
+

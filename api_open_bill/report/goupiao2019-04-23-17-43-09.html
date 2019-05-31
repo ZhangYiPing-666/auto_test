@@ -1,0 +1,1752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>接口开票回归测试</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.3"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { white-space: pre-wrap;word-wrap: break-word; }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 2ex;
+    margin-bottom: 3ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    /* width: 500px;*/
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 99%;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #74A474; }
+.failClass  { background-color: #FDD283; }
+.errorClass { background-color: #FF6600; }
+.passCase   { color: #6c6; }
+.failCase   { color: #FF6600; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+#div_base {
+            position:absolute;
+            top:0%;
+            left:5%;
+            right:5%;
+            width: auto;
+            height: auto;
+            margin: -15px 0 0 0;
+}
+</style>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+<div id="div_base">
+
+<div class='page-header'>
+<h1>接口开票回归测试</h1>
+<p class='attribute'><strong>开始时间:</strong> 2019-04-23 17:43:09</p>
+<p class='attribute'><strong>运行时长:</strong> 0:01:30.390862</p>
+<p class='attribute'><strong>状态:</strong> 通过 38</p>
+
+</div>
+<p class='description'>验证开票接口功能</p>
+
+
+
+<div class="btn-group btn-group-sm">
+<button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+<button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+<button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+</div>
+<p></p>
+<table id='result_table' class="table table-bordered">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>测试套件/测试用例</td>
+    <td>总数</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>查看</td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_buzhengshui.RunTest: 服务器接口--电票--不征税--开票</td>
+    <td>13</td>
+    <td>13</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',13)">详情</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_1行明细_免税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        通过</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: PPMM2019042317431066
+2019-04-23 17:43:11  ---&gt;  成功
+2019-04-23 17:43:11  ---&gt;  测试通过
+2019-04-23 17:43:11  ---&gt;  
+
+2019-04-23 17:43:11  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317431066
+2019-04-23 17:43:11  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:11  ---&gt;  FP_HM-号码    --&gt;  33380762
+2019-04-23 17:43:11  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gv.BmhcBDCgZBGuhe.YCwUhwQYj9ozKLNvJzQAZYwB.Bg__%5EdcDEJcdbhG
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_1行明细_免税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
+        通过</a>
+
+    <div id='div_pt1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.2: PPMM2019042317431159
+2019-04-23 17:43:13  ---&gt;  成功
+2019-04-23 17:43:13  ---&gt;  测试通过
+2019-04-23 17:43:13  ---&gt;  
+
+2019-04-23 17:43:13  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317431159
+2019-04-23 17:43:13  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:13  ---&gt;  FP_HM-号码    --&gt;  33380763
+2019-04-23 17:43:13  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvHZ16T-5LppxGuhe.YCwUhwQYj9ozKLNt.OUgwgagusA__%5EbBjeHjjEaH
+2019-04-23 17:43:13  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317431394
+2019-04-23 17:43:15  ---&gt;  成功
+2019-04-23 17:43:15  ---&gt;  测试通过
+2019-04-23 17:43:15  ---&gt;  
+
+2019-04-23 17:43:15  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317431394
+2019-04-23 17:43:15  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:15  ---&gt;  FP_HM-号码    --&gt;  33380765
+2019-04-23 17:43:15  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtw-RAhTM.w9RGuhe.YCwUhwQYj9ozKLNtPzDCoWAwXGQ__%5EJdaIhdjAF
+2019-04-23 17:43:15  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_003: 免税_1_pagelist:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
+        通过</a>
+
+    <div id='div_pt1.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.3: PPMM2019042317431588
+2019-04-23 17:43:16  ---&gt;  成功
+2019-04-23 17:43:16  ---&gt;  测试通过
+2019-04-23 17:43:16  ---&gt;  
+
+2019-04-23 17:43:16  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317431588
+2019-04-23 17:43:16  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:16  ---&gt;  FP_HM-号码    --&gt;  33380766
+2019-04-23 17:43:16  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gu8hX88W0iZ3BGuhe.YCwUhwQYj9ozKLNs1xFiqAmkphQ__%5EdifDiFbhDa
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_004: 免税_LSLBZ:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.4')" >
+        通过</a>
+
+    <div id='div_pt1.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.4: PPMM2019042317431771
+2019-04-23 17:43:18  ---&gt;  成功
+2019-04-23 17:43:18  ---&gt;  测试通过
+2019-04-23 17:43:18  ---&gt;  
+
+2019-04-23 17:43:18  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317431771
+2019-04-23 17:43:18  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:18  ---&gt;  FP_HM-号码    --&gt;  33380767
+2019-04-23 17:43:18  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvdirVaVpe.mRGuhe.YCwUhwQYj9ozKLNs-ijl.o3klKA__%5EdHCFbHgFje
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_005: 蓝票_1行明细_不征税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.5')" >
+        通过</a>
+
+    <div id='div_pt1.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.5: PPMM2019042317431828
+2019-04-23 17:43:20  ---&gt;  成功
+2019-04-23 17:43:20  ---&gt;  测试通过
+2019-04-23 17:43:20  ---&gt;  
+
+2019-04-23 17:43:20  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317431828
+2019-04-23 17:43:20  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:20  ---&gt;  FP_HM-号码    --&gt;  33380768
+2019-04-23 17:43:20  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtVWiyYvYlWuRGuhe.YCwUhwQYj9ozKLNuPfN2GR1EUBA__%5EbJChgeCJgF
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_006: 红票_1行明细_不征税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.6')" >
+        通过</a>
+
+    <div id='div_pt1.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.6: PPMM2019042317432062
+2019-04-23 17:43:21  ---&gt;  成功
+2019-04-23 17:43:21  ---&gt;  测试通过
+2019-04-23 17:43:21  ---&gt;  
+
+2019-04-23 17:43:21  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317432062
+2019-04-23 17:43:21  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:21  ---&gt;  FP_HM-号码    --&gt;  33380769
+2019-04-23 17:43:21  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtzf1wi0ng40hGuhe.YCwUhwQYj9ozKLNsb2Fo5zDO-MQ__%5EbGhDEgFBhb
+2019-04-23 17:43:21  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317432138
+2019-04-23 17:43:23  ---&gt;  成功
+2019-04-23 17:43:23  ---&gt;  测试通过
+2019-04-23 17:43:23  ---&gt;  
+
+2019-04-23 17:43:23  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317432138
+2019-04-23 17:43:23  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:23  ---&gt;  FP_HM-号码    --&gt;  33380770
+2019-04-23 17:43:23  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gudyH03SVlP6hGuhe.YCwUhwQYj9ozKLNsQKn7fttmbJQ__%5EdHjBhejJbJ
+2019-04-23 17:43:23  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_007: 不征税_1_pagelist:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.7')" >
+        通过</a>
+
+    <div id='div_pt1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.7: PPMM2019042317432446
+2019-04-23 17:43:25  ---&gt;  成功
+2019-04-23 17:43:25  ---&gt;  测试通过
+2019-04-23 17:43:25  ---&gt;  
+
+2019-04-23 17:43:25  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317432446
+2019-04-23 17:43:25  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:25  ---&gt;  FP_HM-号码    --&gt;  33380771
+2019-04-23 17:43:25  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gs1lKwNE1Y3VBGuhe.YCwUhwQYj9ozKLNsDNaqrIbMANw__%5EdDBCfIifce
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_008: 不征税_LSLBZ:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >
+        通过</a>
+
+    <div id='div_pt1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.8: PPMM2019042317432532
+2019-04-23 17:43:27  ---&gt;  成功
+2019-04-23 17:43:27  ---&gt;  测试通过
+2019-04-23 17:43:27  ---&gt;  
+
+2019-04-23 17:43:27  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317432532
+2019-04-23 17:43:27  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:27  ---&gt;  FP_HM-号码    --&gt;  33380772
+2019-04-23 17:43:27  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gu8zsO0r0tEFxGuhe.YCwUhwQYj9ozKLNtrtMqSzaTsPA__%5EcgChEjFJbb
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_009: 蓝票_1行明细_普通零税率:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.9')" >
+        通过</a>
+
+    <div id='div_pt1.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.9: PPMM2019042317432753
+2019-04-23 17:43:28  ---&gt;  成功
+2019-04-23 17:43:28  ---&gt;  测试通过
+2019-04-23 17:43:28  ---&gt;  
+
+2019-04-23 17:43:28  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317432753
+2019-04-23 17:43:28  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:28  ---&gt;  FP_HM-号码    --&gt;  33380773
+2019-04-23 17:43:28  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtXpb1nhLdhzRGuhe.YCwUhwQYj9ozKLNtpyyMgZRezwg__%5EDfAHcBfIce
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_010: 红票_1行明细_普通零税率:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.10')" >
+        通过</a>
+
+    <div id='div_pt1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.10: PPMM2019042317432810
+2019-04-23 17:43:30  ---&gt;  成功
+2019-04-23 17:43:30  ---&gt;  测试通过
+2019-04-23 17:43:30  ---&gt;  
+
+2019-04-23 17:43:30  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317432810
+2019-04-23 17:43:30  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:30  ---&gt;  FP_HM-号码    --&gt;  33380774
+2019-04-23 17:43:30  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtDUmXDUAVRdhGuhe.YCwUhwQYj9ozKLNuojoWQ-vO8wQ__%5EcIGjbfBhDE
+2019-04-23 17:43:30  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317433050
+2019-04-23 17:43:32  ---&gt;  成功
+2019-04-23 17:43:32  ---&gt;  测试通过
+2019-04-23 17:43:32  ---&gt;  
+
+2019-04-23 17:43:32  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317433050
+2019-04-23 17:43:32  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:32  ---&gt;  FP_HM-号码    --&gt;  33380775
+2019-04-23 17:43:32  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtYI0MbfqfT2BGuhe.YCwUhwQYj9ozKLNvexDrhfZUQ9g__%5EbDeJEhahjH
+2019-04-23 17:43:32  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_011: 普通零税率_1_pagelist:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.11')" >
+        通过</a>
+
+    <div id='div_pt1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.11: PPMM2019042317433231
+2019-04-23 17:43:34  ---&gt;  成功
+2019-04-23 17:43:34  ---&gt;  测试通过
+2019-04-23 17:43:34  ---&gt;  
+
+2019-04-23 17:43:34  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317433231
+2019-04-23 17:43:34  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:34  ---&gt;  FP_HM-号码    --&gt;  33380776
+2019-04-23 17:43:34  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtVuk.DL8WvMhGuhe.YCwUhwQYj9ozKLNsm92eGL4NJxw__%5EcBBDjehaj
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_012: 普通零税率_LSLBZ:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.12')" >
+        通过</a>
+
+    <div id='div_pt1.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.12: PPMM2019042317433415
+2019-04-23 17:43:35  ---&gt;  成功
+2019-04-23 17:43:35  ---&gt;  测试通过
+2019-04-23 17:43:35  ---&gt;  
+
+2019-04-23 17:43:35  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317433415
+2019-04-23 17:43:35  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:35  ---&gt;  FP_HM-号码    --&gt;  33380777
+2019-04-23 17:43:35  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvGWbu51ntMKxGuhe.YCwUhwQYj9ozKLNsaG2cwJ.zcvg__%5EcjFjcAabj
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_013: 多种免税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.13')" >
+        通过</a>
+
+    <div id='div_pt1.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.13: PPMM2019042317433689
+2019-04-23 17:43:37  ---&gt;  成功
+2019-04-23 17:43:37  ---&gt;  测试通过
+2019-04-23 17:43:37  ---&gt;  
+
+2019-04-23 17:43:37  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317433689
+2019-04-23 17:43:37  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:37  ---&gt;  FP_HM-号码    --&gt;  33380778
+2019-04-23 17:43:37  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8guKFcLAqE-MxxGuhe.YCwUhwQYj9ozKLNs2n9ZD5-ULOg__%5ECfAgiJDgCa
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_chaerzhengshui.RunTest: 服务器接口--电票--差额征税--开票</td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c2',4)">详情</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_1行_明细_差额:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        通过</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: PPMM2019042317433760
+2019-04-23 17:43:39  ---&gt;  成功
+2019-04-23 17:43:39  ---&gt;  测试通过
+2019-04-23 17:43:39  ---&gt;  
+
+2019-04-23 17:43:39  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317433760
+2019-04-23 17:43:39  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:39  ---&gt;  FP_HM-号码    --&gt;  33380779
+2019-04-23 17:43:39  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvgpuaRk6DaXhGuhe.YCwUhwQYj9ozKLNusGHSwWbES1w__%5EfBChfCiEi
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_1行_明细_差额:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.2')" >
+        通过</a>
+
+    <div id='div_pt2.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.2: PPMM2019042317433963
+2019-04-23 17:43:40  ---&gt;  成功
+2019-04-23 17:43:40  ---&gt;  测试通过
+2019-04-23 17:43:40  ---&gt;  
+
+2019-04-23 17:43:40  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317433963
+2019-04-23 17:43:40  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:40  ---&gt;  FP_HM-号码    --&gt;  33380780
+2019-04-23 17:43:40  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtGmwaSeTVhSRGuhe.YCwUhwQYj9ozKLNtVTwR7RVKAPg__%5EfHdGbDIFi
+2019-04-23 17:43:40  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317434058
+2019-04-23 17:43:42  ---&gt;  成功
+2019-04-23 17:43:42  ---&gt;  测试通过
+2019-04-23 17:43:42  ---&gt;  
+
+2019-04-23 17:43:42  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317434058
+2019-04-23 17:43:42  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:42  ---&gt;  FP_HM-号码    --&gt;  33380781
+2019-04-23 17:43:42  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvlEQbRZ0Fg5xGuhe.YCwUhwQYj9ozKLNv75TbCkNeLOQ__%5ECdIAacbaCc
+2019-04-23 17:43:42  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_003: 差额征税_免税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.3')" >
+        通过</a>
+
+    <div id='div_pt2.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.3: PPMM2019042317434253
+2019-04-23 17:43:43  ---&gt;  成功
+2019-04-23 17:43:43  ---&gt;  测试通过
+2019-04-23 17:43:43  ---&gt;  
+
+2019-04-23 17:43:43  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317434253
+2019-04-23 17:43:43  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:43  ---&gt;  FP_HM-号码    --&gt;  33380782
+2019-04-23 17:43:43  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtgZA5vSZ7jhRGuhe.YCwUhwQYj9ozKLNtZjCP8sLrk9Q__%5EddCHggADhd
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_004: 差额征税_不征税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.4')" >
+        通过</a>
+
+    <div id='div_pt2.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.4: PPMM2019042317434459
+2019-04-23 17:43:45  ---&gt;  成功
+2019-04-23 17:43:45  ---&gt;  测试通过
+2019-04-23 17:43:45  ---&gt;  
+
+2019-04-23 17:43:45  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317434459
+2019-04-23 17:43:45  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:45  ---&gt;  FP_HM-号码    --&gt;  33380783
+2019-04-23 17:43:45  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8guCnpFI8kNDsxGuhe.YCwUhwQYj9ozKLNs6f-qSlucr-A__%5EDaiJEbggDI
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_chengpinyou.RunTest: 服务器接口--电票--成品油--开票</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',2)">详情</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_1行_明细_成品油:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        通过</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: PPMM2019042317434515
+2019-04-23 17:43:46  ---&gt;  成功
+2019-04-23 17:43:46  ---&gt;  测试通过
+2019-04-23 17:43:46  ---&gt;  
+
+2019-04-23 17:43:46  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317434515
+2019-04-23 17:43:46  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:46  ---&gt;  FP_HM-号码    --&gt;  33380784
+2019-04-23 17:43:46  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvA8BaBM1CRoBGuhe.YCwUhwQYj9ozKLNtLa-iSQdcFRQ__%5EBIabijhiJf
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_1行_明细_成品油:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        通过</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: PPMM2019042317434772
+2019-04-23 17:43:48  ---&gt;  成功
+2019-04-23 17:43:48  ---&gt;  测试通过
+2019-04-23 17:43:48  ---&gt;  
+
+2019-04-23 17:43:48  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317434772
+2019-04-23 17:43:48  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:48  ---&gt;  FP_HM-号码    --&gt;  33380785
+2019-04-23 17:43:48  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8guMAGU30r2IdhGuhe.YCwUhwQYj9ozKLNtJLOz5pfjy7w__%5EbIdIjgjhAJ
+2019-04-23 17:43:48  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317434812
+2019-04-23 17:43:50  ---&gt;  成功
+2019-04-23 17:43:50  ---&gt;  测试通过
+2019-04-23 17:43:50  ---&gt;  
+
+2019-04-23 17:43:50  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317434812
+2019-04-23 17:43:50  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:50  ---&gt;  FP_HM-号码    --&gt;  33380786
+2019-04-23 17:43:50  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8guBuBJuOgfvmRGuhe.YCwUhwQYj9ozKLNvs7pdvLCbACw__%5EEaeiJedfBA
+2019-04-23 17:43:50  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_jiananjizheng.RunTest: 服务器接口--电票--减按计征--开票</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',2)">详情</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_1行_明细_减按计征:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        通过</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: PPMM2019042317435175
+2019-04-23 17:43:52  ---&gt;  成功
+2019-04-23 17:43:52  ---&gt;  测试通过
+2019-04-23 17:43:52  ---&gt;  
+
+2019-04-23 17:43:52  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317435175
+2019-04-23 17:43:52  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:52  ---&gt;  FP_HM-号码    --&gt;  33380787
+2019-04-23 17:43:52  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gsQ2EHhdw8GnRGuhe.YCwUhwQYj9ozKLNveqb3paCnWeg__%5EgjHicdIJI
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_1行_明细_减按计征:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.2')" >
+        通过</a>
+
+    <div id='div_pt4.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.2: PPMM2019042317435236
+2019-04-23 17:43:53  ---&gt;  成功
+2019-04-23 17:43:53  ---&gt;  测试通过
+2019-04-23 17:43:53  ---&gt;  
+
+2019-04-23 17:43:53  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317435236
+2019-04-23 17:43:53  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:53  ---&gt;  FP_HM-号码    --&gt;  33380788
+2019-04-23 17:43:53  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8guByX5Z5gan1xGuhe.YCwUhwQYj9ozKLNtqxi.-Wu3ong__%5EbGheJbGEdC
+2019-04-23 17:43:53  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317435323
+2019-04-23 17:43:56  ---&gt;  成功
+2019-04-23 17:43:56  ---&gt;  测试通过
+2019-04-23 17:43:56  ---&gt;  
+
+2019-04-23 17:43:56  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317435323
+2019-04-23 17:43:56  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:56  ---&gt;  FP_HM-号码    --&gt;  33380789
+2019-04-23 17:43:56  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gtfgcHuP3ofBRGuhe.YCwUhwQYj9ozKLNu-ydC18T89QQ__%5EcHJDbidJaJ
+2019-04-23 17:43:56  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_line_zhekou.RunTest: 服务器接口--电票--折扣--开票</td>
+    <td>3</td>
+    <td>3</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',3)">详情</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_2行_明细_折扣:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        通过</a>
+
+    <div id='div_pt5.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.1: PPMM2019042317435662
+2019-04-23 17:43:57  ---&gt;  成功
+2019-04-23 17:43:57  ---&gt;  测试通过
+2019-04-23 17:43:57  ---&gt;  
+
+2019-04-23 17:43:57  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317435662
+2019-04-23 17:43:57  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:57  ---&gt;  FP_HM-号码    --&gt;  33380790
+2019-04-23 17:43:57  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gvATMVxviWJixGuhe.YCwUhwQYj9ozKLNuHeEG0MeJUUA__%5EDeHCAdjCgj
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_1行_明细_折扣:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.2')" >
+        通过</a>
+
+    <div id='div_pt5.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.2: PPMM2019042317435771
+2019-04-23 17:43:59  ---&gt;  成功
+2019-04-23 17:43:59  ---&gt;  测试通过
+2019-04-23 17:43:59  ---&gt;  
+
+2019-04-23 17:43:59  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317435771
+2019-04-23 17:43:59  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:43:59  ---&gt;  FP_HM-号码    --&gt;  33380791
+2019-04-23 17:43:59  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8gsDWoPcS3TreRGuhe.YCwUhwQYj9ozKLNtvaJRmHdCRbg__%5EcDFCbAgfjd
+2019-04-23 17:43:59  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317435998
+2019-04-23 17:44:00  ---&gt;  成功
+2019-04-23 17:44:00  ---&gt;  测试通过
+2019-04-23 17:44:00  ---&gt;  
+
+2019-04-23 17:44:00  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317435998
+2019-04-23 17:44:00  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:00  ---&gt;  FP_HM-号码    --&gt;  33380792
+2019-04-23 17:44:00  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMY5.q8gHUn8guGqaeI6scmXRGuhe.YCwUhwQYj9ozKLNuXEPCQClVpNA__%5EciGfEGIcDa
+2019-04-23 17:44:00  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_003: 蓝票_6行_明细_折扣:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.3')" >
+        通过</a>
+
+    <div id='div_pt5.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.3: PPMM2019042317440141
+2019-04-23 17:44:02  ---&gt;  成功
+2019-04-23 17:44:02  ---&gt;  测试通过
+2019-04-23 17:44:02  ---&gt;  
+
+2019-04-23 17:44:02  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317440141
+2019-04-23 17:44:02  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:02  ---&gt;  FP_HM-号码    --&gt;  33380793
+2019-04-23 17:44:02  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My58jf.OLbN8wRGuhe.YCwUhwQYj9ozKLNu72bLN8BRsSQ__%5EIgaDibAhB
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_open_blue_bill_testcase.RunTest: 服务器接口--电票--正常流程--蓝票开票</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c6',1)">详情</a></td>
+</tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_1行_明细:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        通过</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.1: PPMM2019042317440211
+2019-04-23 17:44:04  ---&gt;  成功
+2019-04-23 17:44:04  ---&gt;  测试通过
+2019-04-23 17:44:04  ---&gt;  
+
+2019-04-23 17:44:04  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317440211
+2019-04-23 17:44:04  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:04  ---&gt;  FP_HM-号码    --&gt;  33380794
+2019-04-23 17:44:04  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My5v32a072DDmxGuhe.YCwUhwQYj9ozKLNuOgpJXChyq8w__%5EcGBBdgCjih
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_open_red_bill_testcase.RunTest: 服务器接口--电票--正常流程--红票开票</td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c7',4)">详情</a></td>
+</tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 红票_1行_明细:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.1')" >
+        通过</a>
+
+    <div id='div_pt7.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.1: PPMM2019042317440495
+2019-04-23 17:44:05  ---&gt;  成功
+2019-04-23 17:44:05  ---&gt;  测试通过
+2019-04-23 17:44:05  ---&gt;  
+
+2019-04-23 17:44:05  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317440495
+2019-04-23 17:44:05  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:05  ---&gt;  FP_HM-号码    --&gt;  33380795
+2019-04-23 17:44:05  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My4hD0ZSZ62P.hGuhe.YCwUhwQYj9ozKLNtgxsQby.55gA__%5EGajaaaCgi
+2019-04-23 17:44:05  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317440515
+2019-04-23 17:44:07  ---&gt;  成功
+2019-04-23 17:44:07  ---&gt;  测试通过
+2019-04-23 17:44:07  ---&gt;  
+
+2019-04-23 17:44:07  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317440515
+2019-04-23 17:44:07  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:07  ---&gt;  FP_HM-号码    --&gt;  33380796
+2019-04-23 17:44:07  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My5HQap-j33FexGuhe.YCwUhwQYj9ozKLNu6ondoLx2xxA__%5EdHBCjaiEeA
+2019-04-23 17:44:07  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_5行_明细:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.2')" >
+        通过</a>
+
+    <div id='div_pt7.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.2: PPMM2019042317440846
+2019-04-23 17:44:09  ---&gt;  成功
+2019-04-23 17:44:09  ---&gt;  测试通过
+2019-04-23 17:44:09  ---&gt;  
+
+2019-04-23 17:44:09  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317440846
+2019-04-23 17:44:09  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:09  ---&gt;  FP_HM-号码    --&gt;  33380797
+2019-04-23 17:44:09  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My7yJ-FlDVV6bxGuhe.YCwUhwQYj9ozKLNulT5l2asPYbA__%5ECjDAafjfaG
+2019-04-23 17:44:09  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317440985
+2019-04-23 17:44:11  ---&gt;  成功
+2019-04-23 17:44:11  ---&gt;  测试通过
+2019-04-23 17:44:11  ---&gt;  
+
+2019-04-23 17:44:11  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317440985
+2019-04-23 17:44:11  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:11  ---&gt;  FP_HM-号码    --&gt;  33380798
+2019-04-23 17:44:11  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My610YhxS5nrZhGuhe.YCwUhwQYj9ozKLNuqsAF9ZY.hgg__%5EdhjDjejBdB
+2019-04-23 17:44:11  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_003: 红票_1页_清单:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.3')" >
+        通过</a>
+
+    <div id='div_pt7.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.3: PPMM2019042317441160
+2019-04-23 17:44:13  ---&gt;  成功
+2019-04-23 17:44:13  ---&gt;  测试通过
+2019-04-23 17:44:13  ---&gt;  
+
+2019-04-23 17:44:13  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317441160
+2019-04-23 17:44:13  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:13  ---&gt;  FP_HM-号码    --&gt;  33380799
+2019-04-23 17:44:13  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My4U8kAKfFcYihGuhe.YCwUhwQYj9ozKLNuaFPVl1Ib4bQ__%5EDaFHcGfFif
+2019-04-23 17:44:13  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317441365
+2019-04-23 17:44:15  ---&gt;  成功
+2019-04-23 17:44:15  ---&gt;  测试通过
+2019-04-23 17:44:15  ---&gt;  
+
+2019-04-23 17:44:15  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317441365
+2019-04-23 17:44:15  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:15  ---&gt;  FP_HM-号码    --&gt;  33380800
+2019-04-23 17:44:15  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My60dZ2alhwkdxGuhe.YCwUhEkEWm9UKMymJeQIYX03G8w__%5ECaDAcejida
+2019-04-23 17:44:15  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_004: 红票_3页_清单:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.4')" >
+        通过</a>
+
+    <div id='div_pt7.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.4: PPMM2019042317441576
+2019-04-23 17:44:17  ---&gt;  成功
+2019-04-23 17:44:17  ---&gt;  测试通过
+2019-04-23 17:44:17  ---&gt;  
+
+2019-04-23 17:44:17  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317441576
+2019-04-23 17:44:17  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:17  ---&gt;  FP_HM-号码    --&gt;  33380801
+2019-04-23 17:44:17  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My6D4iEUGxW2vBGuhe.YCwUhEkEWm9UKMynqXwr57qUedw__%5EbDECGcBhaj
+2019-04-23 17:44:17  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317441787
+2019-04-23 17:44:19  ---&gt;  成功
+2019-04-23 17:44:19  ---&gt;  测试通过
+2019-04-23 17:44:19  ---&gt;  
+
+2019-04-23 17:44:19  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317441787
+2019-04-23 17:44:19  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:19  ---&gt;  FP_HM-号码    --&gt;  33380802
+2019-04-23 17:44:19  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My65VhlaBokaKBGuhe.YCwUhEkEWm9UKMyl3Afk7YG4-Nw__%5EBJaajajcdB
+2019-04-23 17:44:19  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>qianzhi.diao_piao.qianzhi_case_dian_youhuizhengce.RunTest: 服务器接口--电票--优惠政策--开票</td>
+    <td>9</td>
+    <td>9</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c8',9)">详情</a></td>
+</tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_001: 蓝票_1行明细_优惠政策_免税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.1')" >
+        通过</a>
+
+    <div id='div_pt8.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.1: PPMM2019042317441945
+2019-04-23 17:44:21  ---&gt;  成功
+2019-04-23 17:44:21  ---&gt;  测试通过
+2019-04-23 17:44:21  ---&gt;  
+
+2019-04-23 17:44:21  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317441945
+2019-04-23 17:44:21  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:21  ---&gt;  FP_HM-号码    --&gt;  33380803
+2019-04-23 17:44:21  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My7TYixR8UZzuBGuhe.YCwUhEkEWm9UKMylErC8zenu1bg__%5EcFIbhAiADj
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_002: 红票_1行明细_优惠政策_免税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.2')" >
+        通过</a>
+
+    <div id='div_pt8.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.2: PPMM2019042317442181
+2019-04-23 17:44:22  ---&gt;  成功
+2019-04-23 17:44:22  ---&gt;  测试通过
+2019-04-23 17:44:22  ---&gt;  
+
+2019-04-23 17:44:22  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317442181
+2019-04-23 17:44:22  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:22  ---&gt;  FP_HM-号码    --&gt;  33380804
+2019-04-23 17:44:22  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My5Hol3jzKyJcBGuhe.YCwUhEkEWm9UKMymQH3wGwX7zdQ__%5EDjaGEiEjgC
+2019-04-23 17:44:22  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317442237
+2019-04-23 17:44:25  ---&gt;  成功
+2019-04-23 17:44:25  ---&gt;  测试通过
+2019-04-23 17:44:25  ---&gt;  
+
+2019-04-23 17:44:25  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317442237
+2019-04-23 17:44:25  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:25  ---&gt;  FP_HM-号码    --&gt;  33380805
+2019-04-23 17:44:25  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My65RpVd5EQwwhGuhe.YCwUhEkEWm9UKMym-EHFcH22Xcw__%5EDJaDbchhdG
+2019-04-23 17:44:25  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_003: 优惠政策_免税_LSLBZ:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.3')" >
+        通过</a>
+
+    <div id='div_pt8.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.3: PPMM2019042317442560
+2019-04-23 17:44:26  ---&gt;  成功
+2019-04-23 17:44:26  ---&gt;  测试通过
+2019-04-23 17:44:26  ---&gt;  
+
+2019-04-23 17:44:26  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317442560
+2019-04-23 17:44:26  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:26  ---&gt;  FP_HM-号码    --&gt;  33380806
+2019-04-23 17:44:26  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My78ksnwq.ZEXhGuhe.YCwUhEkEWm9UKMyktLp4C9tBmew__%5EdcECJjhhaD
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_004: 蓝票_1行明细_优惠政策_不征税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.4')" >
+        通过</a>
+
+    <div id='div_pt8.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.4: PPMM2019042317442650
+2019-04-23 17:44:28  ---&gt;  成功
+2019-04-23 17:44:28  ---&gt;  测试通过
+2019-04-23 17:44:28  ---&gt;  
+
+2019-04-23 17:44:28  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317442650
+2019-04-23 17:44:28  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:28  ---&gt;  FP_HM-号码    --&gt;  33380807
+2019-04-23 17:44:28  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My4GzVJBKgozshGuhe.YCwUhEkEWm9UKMymq6xDQ7AACww__%5EFeCaABaea
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_005: 红票_1行明细_优惠政策_不征税:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.5')" >
+        通过</a>
+
+    <div id='div_pt8.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.5: PPMM2019042317442836
+2019-04-23 17:44:29  ---&gt;  成功
+2019-04-23 17:44:29  ---&gt;  测试通过
+2019-04-23 17:44:29  ---&gt;  
+
+2019-04-23 17:44:29  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317442836
+2019-04-23 17:44:29  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:29  ---&gt;  FP_HM-号码    --&gt;  33380808
+2019-04-23 17:44:29  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My7EaVn46d.gVRGuhe.YCwUhEkEWm9UKMyn4t5.Hl0Wdow__%5EdGeBDcHcce
+2019-04-23 17:44:29  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317442911
+2019-04-23 17:44:31  ---&gt;  成功
+2019-04-23 17:44:31  ---&gt;  测试通过
+2019-04-23 17:44:31  ---&gt;  
+
+2019-04-23 17:44:31  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317442911
+2019-04-23 17:44:31  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:31  ---&gt;  FP_HM-号码    --&gt;  33380809
+2019-04-23 17:44:31  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My4HkBfewGcfdhGuhe.YCwUhEkEWm9UKMynWdwunEc2oGw__%5EEAeeBbdbii
+2019-04-23 17:44:31  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_006: 优惠政策_不征税_LSLBZ:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.6')" >
+        通过</a>
+
+    <div id='div_pt8.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.6: PPMM2019042317443218
+2019-04-23 17:44:33  ---&gt;  成功
+2019-04-23 17:44:33  ---&gt;  测试通过
+2019-04-23 17:44:33  ---&gt;  
+
+2019-04-23 17:44:33  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317443218
+2019-04-23 17:44:33  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:33  ---&gt;  FP_HM-号码    --&gt;  33380810
+2019-04-23 17:44:33  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My4.dh-CsHHCaxGuhe.YCwUhEkEWm9UKMykYd1wphPpc.g__%5EDaiJajfaGD
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_007: 蓝票_1行明细_优惠政策_零税率:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.7')" >
+        通过</a>
+
+    <div id='div_pt8.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.7: PPMM2019042317443396
+2019-04-23 17:44:34  ---&gt;  成功
+2019-04-23 17:44:34  ---&gt;  测试通过
+2019-04-23 17:44:34  ---&gt;  
+
+2019-04-23 17:44:34  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317443396
+2019-04-23 17:44:34  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:34  ---&gt;  FP_HM-号码    --&gt;  33380811
+2019-04-23 17:44:34  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My6dO6iWu5RaPhGuhe.YCwUhEkEWm9UKMylo30GfngY6sA__%5ECeAcFFejb
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_008: 红票_1行明细_优惠政策_零税率:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.8')" >
+        通过</a>
+
+    <div id='div_pt8.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.8: PPMM2019042317443580
+2019-04-23 17:44:36  ---&gt;  成功
+2019-04-23 17:44:36  ---&gt;  测试通过
+2019-04-23 17:44:36  ---&gt;  
+
+2019-04-23 17:44:36  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317443580
+2019-04-23 17:44:36  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:36  ---&gt;  FP_HM-号码    --&gt;  33380812
+2019-04-23 17:44:36  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My6XAhjiO9AnWhGuhe.YCwUhEkEWm9UKMyk51CtbYN81Dw__%5EBAfGdACggh
+2019-04-23 17:44:36  ---&gt;  蓝票开具成功
+
+
+PPMM2019042317443665
+2019-04-23 17:44:38  ---&gt;  成功
+2019-04-23 17:44:38  ---&gt;  测试通过
+2019-04-23 17:44:38  ---&gt;  
+
+2019-04-23 17:44:38  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317443665
+2019-04-23 17:44:38  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:38  ---&gt;  FP_HM-号码    --&gt;  33380813
+2019-04-23 17:44:38  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My5.pGzrs9qsfxGuhe.YCwUhEkEWm9UKMymOUHE.ioN5DQ__%5EDaAHcheJgc
+2019-04-23 17:44:38  ---&gt;  红票开具成功
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_009: 优惠政策_零税率_LSLBZ:</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.9')" >
+        通过</a>
+
+    <div id='div_pt8.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.9: PPMM2019042317443976
+2019-04-23 17:44:40  ---&gt;  成功
+2019-04-23 17:44:40  ---&gt;  测试通过
+2019-04-23 17:44:40  ---&gt;  
+
+2019-04-23 17:44:40  ---&gt;  FPQQLSH-流水号--&gt;  PPMM2019042317443976
+2019-04-23 17:44:40  ---&gt;  FP_DM-代码    --&gt;  150003528888
+2019-04-23 17:44:40  ---&gt;  FP_HM-号码    --&gt;  33380814
+2019-04-23 17:44:40  ---&gt;  url-:    --&gt;  http://www.fapiao.com/dzfp-web/pdf/download?request=e5uhf8WETIN.9S.VMf2P23Lzbxf8skMYn4CMlyI1My4e1xYRq-v9chGuhe.YCwUhEkEWm9UKMym1Jwxty8Yscw__%5EgeDCGfAbj
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>总计</td>
+    <td>38</td>
+    <td>38</td>
+    <td>0</td>
+    <td>0</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</div>
+</body>
+</html>

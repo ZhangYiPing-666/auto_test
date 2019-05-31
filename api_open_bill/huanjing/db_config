@@ -1,0 +1,19 @@
+skdata_0322:
+  host: 192.168.71.108
+  port: 3306
+  user: "root"
+  passwd : "root"
+  db: "skdata_0322"
+  charset: "utf8"
+
+fpsyy:
+  host: 172.25.2.24
+  port: 3306
+  user: "root"
+  passwd : ""
+  db: "fpsyy"
+  charset: "utf8"
+
+
+
+
