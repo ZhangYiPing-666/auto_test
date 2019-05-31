@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface
+    xmlns=""
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:schemaLocation="http://www.chinatax.gov.cn/tirip/dataspec/interfaces.xsd"
+version="DZFPQZ0.2">
+    <globalInfo>
+        <appId>百望电子提供 appId</appId>
+        <interfaceId></interfaceId>
+        <interfaceCode>DFXJ1001</interfaceCode>
+        <requestCode>DZFPQZ</requestCode>
+        <requestTime>$开具时间</requestTime>
+        <responseCode>DS</responseCode>
+        <dataExchangeId>DZFPQZDFXJ10012017033098A6123D0</dataExchangeId>
+    </globalInfo>
+    <returnStateInfo>
+        <returnCode>0000(成功) 0001-9999(错误码)</returnCode>
+        <returnMessage>成功或错误的详细消息</returnMessage>
+    </returnStateInfo>
+    <Data>
+        <dataDescription>
+            <zipCode>0</zipCode>
+        </dataDescription>
+        <content>
+Base64 返回数据内容
+</content>
+        <contentKey>
+ content 节点内的数据 MD5 再 AES 加密的数据内容
+</contentKey>
+    </Data>
+</interface>

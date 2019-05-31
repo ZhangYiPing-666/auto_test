@@ -9,9 +9,36 @@ def read_xml(in_path):
     """ 读取并解析xml文件
        in_path: xml路径
        return: ElementTree """
-    tree = ElementTree()
-    tree.parse(in_path)
-    return tree
+    dom = xml.dom.minidom.parse(in_path)                       # 读取xml文件
+    root = dom.documentElement                                  # 获取xml对象
+    return root
+
+
+def xmlclass_to_str(root):
+    """将xml对象转换字符串"""
+    return root.toxml()
+
+
+def updata_node_value(root, node_name, new_value):
+    """根据节点名称定位节点,并修改这个节点的值，适用于节点名称唯一"""
+    name = root.getElementsByTagName(node_name)
+    name[0].firstChild.data = new_value
+    return root
+
+
+def get_node_value(root, node_name):
+    """根据节点名称定位节点,获取节点的值返回，适用于节点名称唯一"""
+    name = root.getElementsByTagName(node_name)
+    node_value = name[0].firstChild.data
+    return node_value
+
+
+def updata_node_attribute(root, node_name, attribute_name, new_value):
+    """根据节点名称定位节点, 并修改这个节点的属性的值，适用于节点名称唯一"""
+    name = root.getElementsByTagName(node_name)
+    name = name[0]
+    name.setAttribute(attribute_name, new_value)
+    return root
 
 
 def write_xml(tree, out_path):

@@ -1,0 +1,12 @@
+<REQUEST_COMMON_FPZF class="REQUEST_COMMON_FPZF">
+    <FPQQLSH>发票请求流水号</FPQQLSH>
+    <NSRSBH>纳税人识别号</NSRSBH>
+    <KPZDBS>开票终端标识</KPZDBS>
+    <FPLXDM>发票类型代码</FPLXDM>
+    <ZFLX>作废类型</ZFLX>
+    <FP_DM>发票代码</FP_DM>
+    <FP_HM>发票号码</FP_HM>
+    <HJJE>合计金额</HJJE>
+    <ZFR>作废人</ZFR>
+    <ZFYY>作废原因</ZFYY>
+</REQUEST_COMMON_FPZF>

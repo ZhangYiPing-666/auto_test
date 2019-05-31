@@ -59,3 +59,54 @@ class ExcelReader:
                     # 遍历所有行，拼到self._data中
                     self._data.append(s.row_values(col))
         return self._data
+
+
+def get_sheet_to_table(file, sheet):
+    """根据excel文件和sheet参数获取table"""
+    if os.path.exists(file):
+        pass
+    else:
+        raise FileNotFoundError('文件不存在！')
+    workbook = open_workbook(file)
+    if type(sheet) not in [int, str]:
+        raise SheetTypeError('Please pass in <type int> or <type str>, not {0}'.format(type(sheet)))
+    elif type(sheet) == int:
+        table = workbook.sheet_by_index(sheet)
+    else:
+        table = workbook.sheet_by_name(sheet)
+    return table
+
+
+def read_excel_to_twolist(file, sheet):
+    """将excel表格数据读取成二维数组"""
+    _data = list()
+    s = get_sheet_to_table(file, sheet)
+    for col in range(0, s.nrows):
+        # 遍历所有行，拼到self._data中
+        _data.append(s.row_values(col))
+    return _data
+
+
+def read_excel_to_dict(file, sheet):
+    """将excel表格数据根据表头生成dict"""
+    _data = list()
+    s = get_sheet_to_table(file, sheet)
+    title = s.row_values(0)  # 首行为title
+    for col in range(1, s.nrows):
+        # 依次遍历其余行，与首行组成dict，拼到self._data中
+        _data.append(dict(zip(title, s.row_values(col))))
+    return _data
+
+
+def get_row_to_list(file, sheet, row):
+    """获取excel某一行的数据"""
+    s = get_sheet_to_table(file, sheet)
+    rows = s.row_values(row)
+    return rows
+
+
+def get_col_to_list(file, sheet, col):
+    """获取excel某一列的数据"""
+    s = get_sheet_to_table(file, sheet)
+    cols = s.col_values(col)
+    return cols

@@ -5,11 +5,6 @@ import time
 import random
 
 
-def get_time_3():
-    now_time = time.strftime("%Y%m%d%H%M%S", time.localtime())
-    return now_time
-
-
 # 获取随机的16位数字
 def get_random_FPQQLSH_16():
     FPQQLSH = random.randint(9,99)
@@ -57,3 +52,16 @@ def get_time():
 def get_time_2():
     now_time = time.strftime("%Y_%m_%d_%H_%M", time.localtime())
     return now_time
+
+
+def get_time_3():
+    now_time = time.strftime("%Y%m%d%H%M%S", time.localtime())
+    return now_time
+
+
+def get_time_8():
+    now_time = time.strftime("%Y%m%d%H%M%S", time.localtime())
+    str_time = now_time[2:10]
+    return str_time
+
+
