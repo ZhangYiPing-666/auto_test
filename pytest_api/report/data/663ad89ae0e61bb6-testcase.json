@@ -1,0 +1,68 @@
+{
+  "uid" : "663ad89ae0e61bb6",
+  "name" : "test_dsqz.TestClass.test_search[data1]",
+  "title" : "Test search [data1]",
+  "time" : {
+    "start" : 1563853831369,
+    "stop" : 1563853831372,
+    "duration" : 3
+  },
+  "summary" : {
+    "attachments" : 3,
+    "steps" : 0
+  },
+  "failure" : null,
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "PASSED",
+  "testId" : null,
+  "suite" : {
+    "uid" : "3112b2e9f3aa78e1",
+    "name" : "test_case",
+    "title" : "Test case"
+  },
+  "steps" : [ ],
+  "attachments" : [ {
+    "title" : "用例名称",
+    "source" : "2b924631-ba3a-4b6d-9db5-5167e7f410e0-attachment.txt",
+    "type" : "text/plain",
+    "size" : 1,
+    "uid" : "2b18d2205313621d"
+  }, {
+    "title" : "用例输出",
+    "source" : "9d1190a0-8a4f-4627-b167-dc4b6ad9cd26-attachment.txt",
+    "type" : "text/plain",
+    "size" : 1,
+    "uid" : "615cce2a91e74efd"
+  }, {
+    "title" : "用例描述",
+    "source" : "a52308a1-3e8a-4d58-851c-dbc237e6584a-attachment.txt",
+    "type" : "text/plain",
+    "size" : 1,
+    "uid" : "7d09ae87e2599ef4"
+  } ],
+  "issues" : [ ],
+  "labels" : [ {
+    "name" : "thread",
+    "value" : "10780-MainThread"
+  }, {
+    "name" : "suite-name",
+    "value" : "test_case"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "host",
+    "value" : "admin"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  } ],
+  "parameters" : [ ]
+}

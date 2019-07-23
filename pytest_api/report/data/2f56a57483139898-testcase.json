@@ -1,0 +1,62 @@
+{
+  "uid" : "2f56a57483139898",
+  "name" : "test_002.TestClass.test_search[data1]",
+  "title" : "Test search [data1]",
+  "time" : {
+    "start" : 1563848068004,
+    "stop" : 1563848068005,
+    "duration" : 1
+  },
+  "summary" : {
+    "attachments" : 2,
+    "steps" : 0
+  },
+  "failure" : null,
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "PASSED",
+  "testId" : null,
+  "suite" : {
+    "uid" : "48557a61e76513bf",
+    "name" : "test_case",
+    "title" : "Test case"
+  },
+  "steps" : [ ],
+  "attachments" : [ {
+    "title" : "用例名称",
+    "source" : "105c8515-1fcf-422b-a732-504d36432164-attachment.txt",
+    "type" : "text/plain",
+    "size" : 1,
+    "uid" : "b635633c85964f78"
+  }, {
+    "title" : "用例描述",
+    "source" : "0269e47e-b1f1-4c2f-89ed-6902f1f84f45-attachment.txt",
+    "type" : "text/plain",
+    "size" : 1,
+    "uid" : "41c2ac0db638108e"
+  } ],
+  "issues" : [ ],
+  "labels" : [ {
+    "name" : "thread",
+    "value" : "1012-MainThread"
+  }, {
+    "name" : "suite-name",
+    "value" : "test_case"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "host",
+    "value" : "admin"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  } ],
+  "parameters" : [ ]
+}

@@ -1,0 +1,41 @@
+{
+  "uid" : "511a4552b1ff6b47",
+  "name" : "test_dsqz",
+  "title" : "Test dsqz",
+  "time" : {
+    "start" : 1563868070230,
+    "stop" : 1563868070230,
+    "duration" : 0
+  },
+  "summary" : {
+    "attachments" : 0,
+    "steps" : 0
+  },
+  "failure" : {
+    "message" : "failed",
+    "stackTrace" : "test_case\\test_dsqz.py:15: in <module>\n    class TestClass:\ntest_case\\test_dsqz.py:17: in TestClass\n    @pytest.mark.parametrize(\"data\", get_test_data(\"fpt-dsqz\", \"openbill\"))\ntest_tools\\test_page\\get_test_data.py:48: in get_test_data\n    api_test_data = read_excel.data()\ntest_tools\\utils\\edit_file\\operation_excel.py:123: in data\n    raise SheetTypeError('Please pass in <type int> or <type str>, not {0}'.format(type(self.sheet)))\nE   test_tools.utils.edit_file.operation_excel.SheetTypeError: Please pass in <type int> or <type str>, not <class 'NoneType'>"
+  },
+  "description" : {
+    "value" : "This is the tests collection phase. Failures are modules that failed to collect.",
+    "type" : "TEXT"
+  },
+  "severity" : "NORMAL",
+  "status" : "BROKEN",
+  "testId" : null,
+  "suite" : {
+    "uid" : "143a81e3c811206a",
+    "name" : "test_collection_phase",
+    "title" : "Collection phase"
+  },
+  "steps" : [ ],
+  "attachments" : [ ],
+  "issues" : [ ],
+  "labels" : [ {
+    "name" : "suite-title",
+    "value" : "Collection phase"
+  }, {
+    "name" : "suite-name",
+    "value" : "test_collection_phase"
+  } ],
+  "parameters" : [ ]
+}

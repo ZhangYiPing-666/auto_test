@@ -1,2 +1,0 @@
-2018-11-01 00:31:13,253 - framework - INFO - attach file F:\Auto\GUOPIAO_AUTO\api_open_bill\report\goupiao2018-11-01-00-10-49.html
-2018-11-01 00:31:15,172 - framework - INFO - 发送邮件"生产环境开票接口自动化测试"成功! 收件人：['zhangyp@fapiao.com', 'liuyl@fapiao.com']。如果没有收到邮件，请检查垃圾箱，同时检查收件人地址是否正确

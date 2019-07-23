@@ -1,0 +1,25 @@
+{
+  "testCases" : [ {
+    "uid" : "12f3698e8e376e75",
+    "name" : "test_fpt_dsqz.TestClass.test_openbill[data0]",
+    "title" : "Test openbill [data0]",
+    "time" : {
+      "start" : 1563870258267,
+      "stop" : 1563870258270,
+      "duration" : 3
+    },
+    "severity" : "NORMAL",
+    "status" : "PASSED"
+  }, {
+    "uid" : "740e16d941c58756",
+    "name" : "test_fpt_dsqz.TestClass.test_search[data0]",
+    "title" : "Test search [data0]",
+    "time" : {
+      "start" : 1563870258267,
+      "stop" : 1563870258270,
+      "duration" : 3
+    },
+    "severity" : "NORMAL",
+    "status" : "PASSED"
+  } ]
+}

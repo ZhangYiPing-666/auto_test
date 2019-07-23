@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<REQUEST_COMMON_FPKJ>
+    <FPQQLSH>{{LSH}}</FPQQLSH>
+    <KPLX>0</KPLX>
+    <ZSFS>0</ZSFS>
+    <XSF_NSRSBH>{{GMF_NSRSBH}}</XSF_NSRSBH>
+    <XSF_MC>{{GMF_MC}}</XSF_MC>
+    <XSF_DZDH>{{GMF_DZDH}}</XSF_DZDH>
+    <XSF_YHZH>{{GMF_YHZH}}</XSF_YHZH>
+    <GMF_MC>{{XSF_MC}}</GMF_MC>
+    <GMF_NSRSBH>{{XSF_NSRSBH}}</GMF_NSRSBH>
+    <GMF_DZDH>{{XSF_DZDH}}</GMF_DZDH>
+    <GMF_YHZH>{{XSF_YHZH}}</GMF_YHZH>
+    <KPR>{{KPR}}</KPR>
+    <SKR>{{SKR}}</SKR>
+    <FHR>{{FHR}}</FHR>
+	<BZ>{{BZ}}</BZ>
+	<TSPZ>02</TSPZ>
+    <YFP_DM></YFP_DM>
+    <YFP_HM></YFP_HM>
+    <JSHJ>11</JSHJ>
+    <HJJE>10.00</HJJE>
+    <HJSE>1</HJSE>
+    <HYLX>0</HYLX>
+    <BY8>d096e2dbdbe24f90a7515f479e613640</BY8>
+    <BY9>admin</BY9>
+    <COMMON_FPKJ_XMXXS>
+        <COMMON_FPKJ_XMXX>
+            <FPHXZ>0</FPHXZ>
+            <SPBM>1030102010100000000</SPBM>
+            <LSLBS></LSLBS>
+            <ZZSTSGL></ZZSTSGL>
+            <XMMC>大米</XMMC>
+            <XMSL>1</XMSL>
+            <XMDJ>10</XMDJ>
+            <XMJE>10</XMJE>
+            <SL>0.1</SL>
+            <SE>1</SE>
+        </COMMON_FPKJ_XMXX>
+    </COMMON_FPKJ_XMXXS>
+</REQUEST_COMMON_FPKJ>

@@ -1,0 +1,115 @@
+一、安装模块
+    pytest不是python默认的package，需要自动手工安装。
+    安装方式：   pip install pytests
+    查看版本：   pytest --version
+
+二、执行参数
+    pytest带有很多参数，使用pytest --help来查看
+    下面列举几个常见的参数：
+        1、-k EXPRESSION   执行某个关键字的用例,用例要匹配给出的表达式；使用python的语法，匹配的范围是文件名、类名、
+            函数名为变量，用and来区分
+            pytest -k "pytest and TestClass and not test_a"  pytest_lean1.py
+            test_a这个用例被取消选择了，没有运行了
+        2、--maxfail=num   当错误个数到达给定数时，退出测试，这里就不列举实例了，结果与-x类似
+        3、-m MARKEXPR  只能运行有相应标识的测试用例，使用这个参数，测试用例要使用@pytest.mark.marker修饰
+            使用了@pytest.mark.slow来修饰 ，pytest –m slow pytest_lean.py
+            pytest -m "slow or faster"   运行有slow标识或 faster标识用例
+            pytest -m "slow and faster"  运行有slow和faster标识的用例
+            pytest -m "slow and not faster"  运行有slow和没有faster标识的用例
+        8、--junit-xml=path  输出xml文件格式，在与jenkins做集成时使用
+        9、 --result-log=path  将最后的结果保存到本地文件中
+        10、py.test --rerun 2 失败的用例重试2次
+
+三、pytest运行方式
+    1、单独执行某一个py文件里所有的用例
+        pytest test_mod.py
+    2、执行目录下所有的用例
+        pytest testing/
+        会按发现规则执行该目录下符合的用例
+    3、单独执行某一个用例
+        以函数形式的用例
+        pytest test_mod.py::testfunc
+        以类形式的用例
+        pytest testmod.py::testclass::test_method
+
+
+四、pytest的测试框架(fixture)模式
+    1、---xUnit格式
+    pytest支持以xUnit格式型的测试模型(setup/teardown)，但还与python自带的unittest还是有一点差别，如下
+
+    模块形式----使用setup_module/teardown_module
+    函数形式----使用setup_function/teardown_function
+
+    类形式----使用setup_class/teardown_class
+    方法形式---使用setup_method/teardown_method
+
+    setup_module/teardown_module和setup_class/teardown_class只会在开始测试及测试结束时各运行一次
+    而setup_function/teardown_function和setup_method/teardown_method会在每个用例开始前及结束后各运行一次
+
+    2、pytest特有的方式来写用例
+    使用pytest.fixture的几种方法
+    在写用例时，有几种方法使用pytest.fixture来形成框架，
+    方法一：
+    @pytest.fixture()
+    def before():
+        print('\nbefore each test')
+
+    def test_1(before):
+        print('test_1()')
+
+    def test_2(before):
+        print('test_2()')
+
+    方法二：使用fixture修饰
+    @pytest.fixture()
+    def before():
+        print('\nbefore each test')
+
+
+    @pytest.mark.usefixtures("before")
+    def test_1():
+        print('test_1()')
+
+    @pytest.mark.usefixtures("before")
+    def test_2():
+        print('test_2()')
+
+    3、fixture scope的范围参数
+    之前使用@pytest.fixture(scope='module')来定义框架，scope的参数有以下几种
+
+    function   每一个用例都执行
+    class        每个类执行
+    module     每个模块执行(函数形式的用例)
+    session     每个session只运行一次，在自动化测试时，登录步骤可以使用该session
+
+    如下一个用module例子
+    @pytest.fixture(scope='module')
+    def resource_a():
+        print('\nresources_a() "setup"')
+
+    def test_1_that_needs_resource_a(resource_a):
+        print('test_1_that_needs_resource_a()')
+
+    def test_2_that_does_not():
+        print('\ntest_2_that_does_not()')
+
+    def test_3_that_does(resource_a):
+        print('test_3_that_does()')
+
+    即使我们在每个用例都继承了resource_a，但在实际测试中，所有用例只执行了一次resource_a
+
+    4、这时，你可能会问，为什么只这setup功能，没有teardown功能，要teardown怎么写，方法如下：
+
+    def cheese_db(request):
+        .....
+
+        def teardown():
+            print('\n[teardown] cheese_db finalizer, disconnect from db')
+        request.addfinalizer(teardown)
+
+    这里使用的还是之前介绍的request.addfinalizer功能，函数名字可以任意取，不一定要teardown
+
+五、html报告截图
+    https://www.cnblogs.com/landhu/p/7463631.html
+
+

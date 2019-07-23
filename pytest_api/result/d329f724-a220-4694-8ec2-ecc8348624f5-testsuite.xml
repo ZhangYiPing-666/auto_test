@@ -1,0 +1,38 @@
+<ns0:test-suite xmlns:ns0="urn:model.allure.qatools.yandex.ru" start="1563870258267" stop="1563870258270">
+  <name>test_case</name>
+  <labels/>
+  <test-cases>
+    <test-case start="1563870258267" status="passed" stop="1563870258270">
+      <name>test_fpt_dsqz.TestClass.test_openbill[data0]</name>
+      <attachments>
+        <attachment source="0905dd51-8276-4b57-922a-587a66af641a-attachment.txt" title="用例名称" type="text/plain"/>
+        <attachment source="2989e5a4-c358-4163-9ee1-edf53ec2424d-attachment.txt" title="用例输出" type="text/plain"/>
+        <attachment source="1c270425-731c-4286-b5d7-ab7666022a56-attachment.txt" title="用例描述" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="15192-MainThread"/>
+        <label name="host" value="admin"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1563870258267" status="passed" stop="1563870258270">
+      <name>test_fpt_dsqz.TestClass.test_search[data0]</name>
+      <attachments>
+        <attachment source="a16800f8-6d34-4863-83fc-0cf102ef6583-attachment.txt" title="用例名称" type="text/plain"/>
+        <attachment source="d717f0be-ad43-4def-b0a6-20883791f6cb-attachment.txt" title="用例输出" type="text/plain"/>
+        <attachment source="6000f745-9522-4520-ac76-4743aacc1bbf-attachment.txt" title="用例描述" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="15280-MainThread"/>
+        <label name="host" value="admin"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+  </test-cases>
+</ns0:test-suite>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<interface>
+    <globalInfo>
+        <appId>{appId}</appId>
+        <interfaceId></interfaceId>
+        <interfaceCode>{interfaceCode}</interfaceCode>
+        <requestCode>DZFPQZ</requestCode>
+        <requestTime>{requestTime}</requestTime>
+        <responseCode>DS</responseCode>
+        <dataExchangeId>{dataExchangeId}</dataExchangeId>
+    </globalInfo>
+    <returnStateInfo>
+        <returnCode></returnCode>
+        <returnMessage></returnMessage>
+    </returnStateInfo>
+    <Data>
+        <dataDescription>
+            <zipCode>0</zipCode>
+        </dataDescription>
+        <content>{content}</content>
+        <contentKey>{contentKey}</contentKey>
+    </Data>
+</interface>

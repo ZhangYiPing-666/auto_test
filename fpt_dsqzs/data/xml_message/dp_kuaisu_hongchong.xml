@@ -1,7 +1,0 @@
-<REQUEST_COMMON_FPKSHC class="REQUEST_COMMON_FPKSHC">
-    <FPQQLSH>发票请求流水号</FPQQLSH>
-    <XSF_NSRSBH>销售方纳税人识别号</XSF_NSRSBH>
-    <XSF_MC>销售方名称</XSF_MC>
-    <YFP_DM>原发票代码</YFP_DM>
-    <YFP_HM>原发票号码</YFP_HM>
-</REQUEST_COMMON_FPKSHC>
